@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/features/auth/presentation/pages/login_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -26,6 +27,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
         ...actions,
+        IconButton(
+          icon: const Icon(Icons.logout),
+          tooltip: 'Logout',
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LoginPage(
+                  isDark: isDark,
+                  onThemeChanged: onThemeChanged,
+                ),
+              ),
+              (route) => false,
+            );
+          },
+        )
       ],
     );
   }

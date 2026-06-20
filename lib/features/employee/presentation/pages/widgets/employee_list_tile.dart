@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/theme/app_colors.dart';
 import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 
 class EmployeeListTile extends StatelessWidget {
@@ -16,11 +17,28 @@ class EmployeeListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color _getDepartmentColor() {
+      switch (employee.department) {
+        case EmployeeDepartment.engineering:
+          return AppColors.primary;
+        case EmployeeDepartment.design:
+          return AppColors.green;
+        case EmployeeDepartment.hr:
+          return AppColors.red;
+        case EmployeeDepartment.marketing:
+          return AppColors.teal;
+        case EmployeeDepartment.sales:
+          return AppColors.greyColor;
+      }
+    }
+
     return Card(
       child: ListTile(
         onTap: onTap,
         onLongPress: onLongPress,
         leading: CircleAvatar(
+          backgroundColor: _getDepartmentColor().withAlpha(30),
+          foregroundColor: _getDepartmentColor(),
           child: Text(
             employee.fullName[0].toUpperCase(),
           ),

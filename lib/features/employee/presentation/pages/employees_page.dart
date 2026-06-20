@@ -189,54 +189,60 @@ class _EmployeesPageState extends State<EmployeesPage> {
             final totalCount = state.employees.length;
             final favoritesCount =
                 state.employees.where((e) => e.isFavorite).length;
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  EmployeeHeaderCard(
-                    totalEmployees: totalCount,
-                    favoriteEmployees: favoritesCount,
-                  ),
-                  const SizedBox(height: 12),
-                  Card(
-                    child: EmployeeFilterPanel(
-                      searchController: _searchController,
-                      selectedDepartment: _selectedDepartment,
-                      showFavoritesOnly: _showFavoritesOnly,
-                      onDepartmentSelected: (dept) {
-                        setState(() {
-                          _selectedDepartment = dept;
-                        });
-                      },
-                      onFavoritesOnlyChanged: (value) {
-                        setState(() {
-                          _showFavoritesOnly = value;
-                        });
-                      },
-                      onClearFilters: _clearFilters,
+                
+            return RefreshIndicator(
+              onRefresh: () async {
+                await context.read<EmployeeCubit>().loadEmployees();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    EmployeeHeaderCard(
+                      totalEmployees: totalCount,
+                      favoriteEmployees: favoritesCount,
                     ),
-                  ),
-                  Expanded(
-                    child: displayList.isEmpty
-                        ? EmployeeEmptyState(onClearFilters: _clearFilters)
-                        : ListView.builder(
-                            itemCount: displayList.length,
-                            itemBuilder: (context, index) {
-                              final emp = displayList[index];
-                              return EmployeeListTile(
-                                employee: emp,
-                                onFavoritePressed: () {
-                                  context
-                                      .read<EmployeeCubit>()
-                                      .toggleFavorite(emp);
-                                },
-                                onTap: () => _openEditEmployeeForm(emp),
-                                onLongPress: () => _confirmDelete(emp),
-                              );
-                            },
-                          ),
-                  ),
-                ],
+                    const SizedBox(height: 12),
+                    Card(
+                      child: EmployeeFilterPanel(
+                        searchController: _searchController,
+                        selectedDepartment: _selectedDepartment,
+                        showFavoritesOnly: _showFavoritesOnly,
+                        onDepartmentSelected: (dept) {
+                          setState(() {
+                            _selectedDepartment = dept;
+                          });
+                        },
+                        onFavoritesOnlyChanged: (value) {
+                          setState(() {
+                            _showFavoritesOnly = value;
+                          });
+                        },
+                        onClearFilters: _clearFilters,
+                      ),
+                    ),
+                    Expanded(
+                      child: displayList.isEmpty
+                          ? EmployeeEmptyState(onClearFilters: _clearFilters)
+                          : ListView.builder(
+                              itemCount: displayList.length,
+                              itemBuilder: (context, index) {
+                                final emp = displayList[index];
+                                return EmployeeListTile(
+                                  employee: emp,
+                                  onFavoritePressed: () {
+                                    context
+                                        .read<EmployeeCubit>()
+                                        .toggleFavorite(emp);
+                                  },
+                                  onTap: () => _openEditEmployeeForm(emp),
+                                  onLongPress: () => _confirmDelete(emp),
+                                );
+                              },
+                            ),
+                    ),
+                  ],
+                ),
               ),
             );
           }

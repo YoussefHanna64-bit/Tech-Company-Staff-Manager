@@ -36,7 +36,7 @@ class EmployeeFilterPanel extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Wrap(
-            spacing: 8,
+            spacing: 4,
             children: [
               FilterChip(
                 label: const Text("Engineering"),
