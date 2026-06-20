@@ -4,11 +4,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isDark;
   final ValueChanged<bool> onThemeChanged;
+  final List<Widget> actions;
   const CustomAppBar({
     super.key,
     required this.title,
     required this.isDark,
     required this.onThemeChanged,
+    this.actions = const [],
   });
 
   @override
@@ -23,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onThemeChanged(!isDark);
           },
         ),
+        ...actions,
       ],
     );
   }

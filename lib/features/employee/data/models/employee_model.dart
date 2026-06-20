@@ -33,9 +33,9 @@ class EmployeeModel extends Employee {
       parsedFavorite = favorite.toLowerCase() == 'true';
     }
 
-    final deptString = map["department"] as String?;
+    final deptString = (map['department'] as String?)?.toLowerCase();
     final parsedDepartment = EmployeeDepartment.values.firstWhere(
-      (e) => e.name == deptString,
+      (e) => e.name.toLowerCase() == deptString,
       orElse: () => EmployeeDepartment.engineering,
     );
 

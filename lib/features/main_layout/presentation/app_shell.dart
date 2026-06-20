@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:staff_manager/features/dashboard/presentation/pages/dashboard_page.dart';
+import 'package:staff_manager/features/employee/presentation/pages/employees_page.dart';
 
 class AppShell extends StatefulWidget {
   final bool isDark;
@@ -22,7 +23,10 @@ class _AppShellState extends State<AppShell> {
         isDark: widget.isDark,
         onThemeChanged: widget.onThemeChanged,
       ),
-      const Center(child: Text("Employees Screen Coming Next")),
+      EmployeesPage(
+        isDark: widget.isDark,
+        onThemeChanged: widget.onThemeChanged,
+      ),
     ];
 
     return Scaffold(
