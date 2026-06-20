@@ -4,53 +4,67 @@ import 'package:staff_manager/core/theme/app_text_styles.dart';
 import 'package:staff_manager/core/utils/validators.dart';
 import 'package:staff_manager/core/widgets/custom_button.dart';
 import 'package:staff_manager/core/widgets/custom_text_form_field.dart';
-import 'package:staff_manager/features/auth/presentation/pages/register_page.dart';
 import 'package:staff_manager/features/main_layout/presentation/app_shell.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final bool isDark;
   final ValueChanged<bool> onThemeChanged;
 
-  const LoginPage(
-      {super.key, required this.isDark, required this.onThemeChanged});
+  const RegisterPage({
+    super.key,
+    required this.isDark,
+    required this.onThemeChanged,
+  });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
+  final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-  bool _obscurePassword = true;
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
 
-  void _onSubmit() {
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
+  void _onRegister() {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Welcome back")),
+        const SnackBar(content: Text("Account created successfully!")),
+      );
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => AppShell(
+            isDark: widget.isDark,
+            onThemeChanged: widget.onThemeChanged,
+          ),
+        ),
       );
     }
-
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => AppShell(
-          isDark: widget.isDark,
-          onThemeChanged: widget.onThemeChanged,
-        ),
-      ),
-    );
   }
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
 
+    _nameFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
     super.dispose();
   }
 
@@ -66,20 +80,31 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.business_center,
+                  const Icon(Icons.person_add_alt_1,
                       size: 80, color: AppColors.primary),
                   const SizedBox(height: 24),
                   const Text(
-                    "Tech Company Portal",
+                    "Create Account",
                     style: AppTextStyles.bold28Dark,
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "Sign in to manage employees and departments",
+                    "Join the Tech Company Portal",
                     textAlign: TextAlign.center,
                     style: AppTextStyles.regular16Grey,
                   ),
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 40),
+                  CustomTextFormField(
+                    controller: _nameController,
+                    focusNode: _nameFocusNode,
+                    keyboardType: TextInputType.name,
+                    labelText: "Full Name",
+                    hintText: "Example: Legend",
+                    icon: Icons.person_outline,
+                    validator: (value) =>
+                        Validators.validateMinLength(value, 2, "Full name"),
+                  ),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     controller: _emailController,
                     focusNode: _emailFocusNode,
@@ -95,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                     focusNode: _passwordFocusNode,
                     keyboardType: TextInputType.visiblePassword,
                     labelText: "Password",
-                    hintText: "Enter your password",
+                    hintText: "Create a password",
                     icon: Icons.lock_outline,
                     validator: Validators.validatePassword,
                     obscureText: _obscurePassword,
@@ -105,27 +130,39 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                   ),
+                  const SizedBox(height: 16),
+                  CustomTextFormField(
+                    controller: _confirmPasswordController,
+                    focusNode: _confirmPasswordFocusNode,
+                    keyboardType: TextInputType.visiblePassword,
+                    labelText: "Confirm Password",
+                    hintText: "Re-enter your password",
+                    icon: Icons.lock_reset,
+                    obscureText: _obscureConfirmPassword,
+                    onToggleVisibility: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                    validator: (value) => Validators.validateConfirmPassword(
+                      value,
+                      _passwordController.text,
+                    ),
+                  ),
                   const SizedBox(height: 32),
                   CustomButton(
-                    label: "Login",
-                    icon: Icons.login,
-                    onPressed: _onSubmit,
+                    label: "Register",
+                    icon: Icons.how_to_reg,
+                    onPressed: _onRegister,
                   ),
                   const SizedBox(height: 16),
                   TextButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => RegisterPage(
-                            isDark: widget.isDark,
-                            onThemeChanged: widget.onThemeChanged,
-                          ),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.person_add),
-                    label: const Text("Create account",
-                        style: AppTextStyles.medium16Dark),
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.login),
+                    label: const Text(
+                      "Already have an account? Login",
+                      style: AppTextStyles.medium16Dark,
+                    ),
                   )
                 ],
               ),

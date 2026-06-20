@@ -30,6 +30,23 @@ class Validators {
     return null;
   }
 
+  static String? validateConfirmPassword(
+    String? value,
+    String password,
+  ) {
+    final text = value?.trim() ?? "";
+
+    if (text.isEmpty) {
+      return "Please confirm your password";
+    }
+
+    if (text != password) {
+      return "Passwords don't match";
+    }
+
+    return null;
+  }
+
   static String? validateMinLength(
     String? value,
     int minLength,
