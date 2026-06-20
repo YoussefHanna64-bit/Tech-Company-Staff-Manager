@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class AppShell extends StatefulWidget {
   final bool isDark;
@@ -17,7 +18,10 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      const Center(child: Text("Dashboard Screen Coming Next")),
+      DashboardPage(
+        isDark: widget.isDark,
+        onThemeChanged: widget.onThemeChanged,
+      ),
       const Center(child: Text("Employees Screen Coming Next")),
     ];
 
