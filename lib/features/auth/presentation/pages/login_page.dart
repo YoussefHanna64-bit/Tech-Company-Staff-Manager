@@ -4,6 +4,7 @@ import 'package:staff_manager/core/theme/app_text_styles.dart';
 import 'package:staff_manager/core/utils/validators.dart';
 import 'package:staff_manager/core/widgets/custom_button.dart';
 import 'package:staff_manager/core/widgets/custom_text_form_field.dart';
+import 'package:staff_manager/features/main_layout/presentation/app_shell.dart';
 
 class LoginPage extends StatefulWidget {
   final bool isDark;
@@ -31,6 +32,15 @@ class _LoginPageState extends State<LoginPage> {
         const SnackBar(content: Text("Welcome back")),
       );
     }
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => AppShell(
+          isDark: widget.isDark,
+          onThemeChanged: widget.onThemeChanged,
+        ),
+      ),
+    );
   }
 
   @override
