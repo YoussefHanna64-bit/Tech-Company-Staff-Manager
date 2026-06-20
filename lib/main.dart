@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:staff_manager/core/network/dio_client.dart';
+import 'package:staff_manager/features/employee/auth/presentation/pages/login_page.dart';
 import 'package:staff_manager/features/employee/data/datasources/employee_local_data_source.dart';
 import 'package:staff_manager/features/employee/data/datasources/employee_remote_data_source.dart';
 import 'package:staff_manager/features/employee/data/repositories/employee_repository_impl.dart';
@@ -62,10 +63,10 @@ class _StaffManagerAppState extends State<StaffManagerApp> {
           useMaterial3: true,
         ),
         themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-        // home: LoginPage(
-        //   isDark: isDark,
-        //   onThemeChanged: toggleTheme,
-        // ),
+        home: LoginPage(
+          isDark: isDark,
+          onThemeChanged: toggleTheme,
+        ),
       ),
     );
   }
