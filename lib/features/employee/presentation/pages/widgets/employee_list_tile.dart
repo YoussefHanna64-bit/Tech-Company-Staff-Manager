@@ -5,18 +5,21 @@ class EmployeeListTile extends StatelessWidget {
   final Employee employee;
   final VoidCallback onFavoritePressed;
   final VoidCallback onTap;
+  final VoidCallback onLongPress;
 
   const EmployeeListTile(
       {super.key,
       required this.employee,
       required this.onFavoritePressed,
-      required this.onTap});
+      required this.onTap,
+      required this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         onTap: onTap,
+        onLongPress: onLongPress,
         leading: CircleAvatar(
           child: Text(
             employee.fullName[0].toUpperCase(),

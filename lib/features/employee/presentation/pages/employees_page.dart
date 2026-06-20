@@ -5,6 +5,7 @@ import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 import 'package:staff_manager/features/employee/presentation/cubit/employee_cubit.dart';
 import 'package:staff_manager/features/employee/presentation/cubit/employee_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/employee_form_page.dart';
+import 'package:staff_manager/features/employee/presentation/pages/widgets/delete_employee_dialog.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_empty_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_error_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_filter_panel.dart';
@@ -136,6 +137,25 @@ class _EmployeesPageState extends State<EmployeesPage> {
     );
   }
 
+  Future<void> _confirmDelete(Employee employee) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (_) => DeleteEmployeeDialog(
+        employee: employee,
+      ),
+    );
+
+    if (confirmed == true && mounted) {
+      context.read<EmployeeCubit>().deleteEmployee(employee.id);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${employee.fullName} deleted'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,13 +216,15 @@ class _EmployeesPageState extends State<EmployeesPage> {
                             itemBuilder: (context, index) {
                               final emp = displayList[index];
                               return EmployeeListTile(
-                                  employee: emp,
-                                  onFavoritePressed: () {
-                                    context
-                                        .read<EmployeeCubit>()
-                                        .toggleFavorite(emp);
-                                  },
-                                  onTap: () => _openEditEmployeeForm(emp));
+                                employee: emp,
+                                onFavoritePressed: () {
+                                  context
+                                      .read<EmployeeCubit>()
+                                      .toggleFavorite(emp);
+                                },
+                                onTap: () => _openEditEmployeeForm(emp),
+                                onLongPress: () => _confirmDelete(emp),
+                              );
                             },
                           ),
                   ),
