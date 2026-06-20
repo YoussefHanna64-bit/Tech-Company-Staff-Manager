@@ -23,93 +23,95 @@ class EmployeeFilterPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextFormField(
-          controller: searchController,
-          labelText: "Search Employees",
-          hintText: "Search by name, job title, or department",
-          icon: Icons.search,
-          validator: (value) => null,
-        ),
-        const SizedBox(height: 12),
-        Wrap(
-          spacing: 8,
-          children: [
-            FilterChip(
-              label: const Text("Engineering"),
-              selected: selectedDepartment == EmployeeDepartment.engineering,
-              onSelected: (_) {
-                if (selectedDepartment == EmployeeDepartment.engineering) {
-                  onDepartmentSelected(null);
-                } else {
-                  onDepartmentSelected(EmployeeDepartment.engineering);
-                }
-              },
-            ),
-            FilterChip(
-                label: const Text("Design"),
-                selected: selectedDepartment == EmployeeDepartment.design,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          CustomTextFormField(
+            controller: searchController,
+            labelText: "Search Employees",
+            hintText: "Search by name, job title, or department",
+            icon: Icons.search,
+            validator: (value) => null,
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            children: [
+              FilterChip(
+                label: const Text("Engineering"),
+                selected: selectedDepartment == EmployeeDepartment.engineering,
                 onSelected: (_) {
-                  if (selectedDepartment == EmployeeDepartment.design) {
+                  if (selectedDepartment == EmployeeDepartment.engineering) {
                     onDepartmentSelected(null);
                   } else {
-                    onDepartmentSelected(EmployeeDepartment.design);
+                    onDepartmentSelected(EmployeeDepartment.engineering);
                   }
-                }),
-            FilterChip(
-              label: const Text("HR"),
-              selected: selectedDepartment == EmployeeDepartment.hr,
-              onSelected: (_) {
-                if (selectedDepartment == EmployeeDepartment.hr) {
-                  onDepartmentSelected(null);
-                } else {
-                  onDepartmentSelected(EmployeeDepartment.hr);
-                }
-              },
-            ),
-            FilterChip(
-              label: const Text("Marketing"),
-              selected: selectedDepartment == EmployeeDepartment.marketing,
-              onSelected: (_) {
-                if (selectedDepartment == EmployeeDepartment.marketing) {
-                  onDepartmentSelected(null);
-                } else {
-                  onDepartmentSelected(EmployeeDepartment.marketing);
-                }
-              },
-            ),
-            FilterChip(
-              label: const Text("Sales"),
-              selected: selectedDepartment == EmployeeDepartment.sales,
-              onSelected: (_) {
-                if (selectedDepartment == EmployeeDepartment.sales) {
-                  onDepartmentSelected(null);
-                } else {
-                  onDepartmentSelected(EmployeeDepartment.sales);
-                }
-              },
-            ),
-          ],
-        ),
-        SwitchListTile(
-          title: const Text("Show Favorites Only"),
-          secondary: const Icon(
-            Icons.favorite_border,
+                },
+              ),
+              FilterChip(
+                  label: const Text("Design"),
+                  selected: selectedDepartment == EmployeeDepartment.design,
+                  onSelected: (_) {
+                    if (selectedDepartment == EmployeeDepartment.design) {
+                      onDepartmentSelected(null);
+                    } else {
+                      onDepartmentSelected(EmployeeDepartment.design);
+                    }
+                  }),
+              FilterChip(
+                label: const Text("HR"),
+                selected: selectedDepartment == EmployeeDepartment.hr,
+                onSelected: (_) {
+                  if (selectedDepartment == EmployeeDepartment.hr) {
+                    onDepartmentSelected(null);
+                  } else {
+                    onDepartmentSelected(EmployeeDepartment.hr);
+                  }
+                },
+              ),
+              FilterChip(
+                label: const Text("Marketing"),
+                selected: selectedDepartment == EmployeeDepartment.marketing,
+                onSelected: (_) {
+                  if (selectedDepartment == EmployeeDepartment.marketing) {
+                    onDepartmentSelected(null);
+                  } else {
+                    onDepartmentSelected(EmployeeDepartment.marketing);
+                  }
+                },
+              ),
+              FilterChip(
+                label: const Text("Sales"),
+                selected: selectedDepartment == EmployeeDepartment.sales,
+                onSelected: (_) {
+                  if (selectedDepartment == EmployeeDepartment.sales) {
+                    onDepartmentSelected(null);
+                  } else {
+                    onDepartmentSelected(EmployeeDepartment.sales);
+                  }
+                },
+              ),
+            ],
           ),
-          value: showFavoritesOnly,
-          onChanged: onFavoritesOnlyChanged,
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton.icon(
-            onPressed: onClearFilters,
-            icon: const Icon(Icons.clear),
-            label: const Text("Clear Filters"),
+          SwitchListTile(
+            title: const Text("Show Favorites Only"),
+            secondary: const Icon(
+              Icons.favorite_border,
+            ),
+            value: showFavoritesOnly,
+            onChanged: onFavoritesOnlyChanged,
           ),
-        ),
-        const Divider(thickness: 2),
-      ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton.icon(
+              onPressed: onClearFilters,
+              icon: const Icon(Icons.clear),
+              label: const Text("Clear Filters"),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

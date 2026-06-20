@@ -4,6 +4,7 @@ import 'package:staff_manager/core/widgets/custom_app_bar.dart';
 import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 import 'package:staff_manager/features/employee/presentation/cubit/employee_cubit.dart';
 import 'package:staff_manager/features/employee/presentation/cubit/employee_state.dart';
+import 'package:staff_manager/features/employee/presentation/pages/employee_form_page.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_empty_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_error_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_filter_panel.dart';
@@ -90,15 +91,49 @@ class _EmployeesPageState extends State<EmployeesPage> {
     }).toList();
 
     filtered.sort((a, b) {
-      if (_sortBy == 'salary') {
+      if (_sortBy == "salary") {
         return b.salary.compareTo(a.salary);
-      } else if (_sortBy == 'jobTitle') {
+      } else if (_sortBy == "jobTitle") {
         return a.jobTitle.compareTo(b.jobTitle);
       }
       return a.fullName.compareTo(b.fullName);
     });
 
     return filtered;
+  }
+
+  Future<void> _openAddEmployeeForm() async {
+    final newEmployee = await Navigator.of(context).push<Employee>(
+      MaterialPageRoute(builder: (context) => const EmployeeFormPage()),
+    );
+
+    if (!mounted || newEmployee == null) {
+      return;
+    }
+
+    context.read<EmployeeCubit>().addEmployee(newEmployee);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${newEmployee.fullName} added')),
+    );
+  }
+
+  Future<void> _openEditEmployeeForm(Employee employee) async {
+    final updatedEmployee = await Navigator.of(context).push<Employee>(
+      MaterialPageRoute(
+        builder: (context) => EmployeeFormPage(existingEmployee: employee),
+      ),
+    );
+
+    if (!mounted || updatedEmployee == null) {
+      return;
+    }
+
+    context.read<EmployeeCubit>().updateEmployee(updatedEmployee);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${updatedEmployee.fullName} updated')),
+    );
   }
 
   @override
@@ -135,23 +170,24 @@ class _EmployeesPageState extends State<EmployeesPage> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  EmployeeFilterPanel(
-                    searchController: _searchController,
-                    selectedDepartment: _selectedDepartment,
-                    showFavoritesOnly: _showFavoritesOnly,
-                    onDepartmentSelected: (dept) {
-                      setState(() {
-                        _selectedDepartment = dept;
-                      });
-                    },
-                    onFavoritesOnlyChanged: (value) {
-                      setState(() {
-                        _showFavoritesOnly = value;
-                      });
-                    },
-                    onClearFilters: _clearFilters,
+                  Card(
+                    child: EmployeeFilterPanel(
+                      searchController: _searchController,
+                      selectedDepartment: _selectedDepartment,
+                      showFavoritesOnly: _showFavoritesOnly,
+                      onDepartmentSelected: (dept) {
+                        setState(() {
+                          _selectedDepartment = dept;
+                        });
+                      },
+                      onFavoritesOnlyChanged: (value) {
+                        setState(() {
+                          _showFavoritesOnly = value;
+                        });
+                      },
+                      onClearFilters: _clearFilters,
+                    ),
                   ),
-                  const Divider(),
                   Expanded(
                     child: displayList.isEmpty
                         ? EmployeeEmptyState(onClearFilters: _clearFilters)
@@ -160,14 +196,13 @@ class _EmployeesPageState extends State<EmployeesPage> {
                             itemBuilder: (context, index) {
                               final emp = displayList[index];
                               return EmployeeListTile(
-                                employee: emp,
-                                onFavoritePressed: () {
-                                  context
-                                      .read<EmployeeCubit>()
-                                      .toggleFavorite(emp);
-                                },
-                                onTap: () {},
-                              );
+                                  employee: emp,
+                                  onFavoritePressed: () {
+                                    context
+                                        .read<EmployeeCubit>()
+                                        .toggleFavorite(emp);
+                                  },
+                                  onTap: () => _openEditEmployeeForm(emp));
                             },
                           ),
                   ),
@@ -180,7 +215,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: _openAddEmployeeForm,
         child: const Icon(Icons.add),
       ),
     );
