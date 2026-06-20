@@ -9,6 +9,7 @@ import 'package:staff_manager/features/employee/presentation/pages/widgets/delet
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_empty_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_error_state.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_filter_panel.dart';
+import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_header_card.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/employee_list_tile.dart';
 import 'package:staff_manager/features/employee/presentation/pages/widgets/sort_bottom_sheet.dart';
 
@@ -185,11 +186,18 @@ class _EmployeesPageState extends State<EmployeesPage> {
 
           if (state is EmployeeLoaded) {
             final displayList = _getFilteredAndSortedEmployees(state.employees);
-
+            final totalCount = state.employees.length;
+            final favoritesCount =
+                state.employees.where((e) => e.isFavorite).length;
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  EmployeeHeaderCard(
+                    totalEmployees: totalCount,
+                    favoriteEmployees: favoritesCount,
+                  ),
+                  const SizedBox(height: 12),
                   Card(
                     child: EmployeeFilterPanel(
                       searchController: _searchController,
