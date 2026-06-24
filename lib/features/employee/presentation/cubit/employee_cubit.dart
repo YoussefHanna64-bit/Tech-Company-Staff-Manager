@@ -56,4 +56,38 @@ class EmployeeCubit extends Cubit<EmployeeState> {
       emit(EmployeeError(message: "Failed to update favorite status: $e"));
     }
   }
+
+  static List<Employee> filterAndSortEmployees({
+    required List<Employee> employees,
+    required String searchQuery,
+    required EmployeeDepartment? selectedDepartment,
+    required bool showFavoritesOnly,
+    required SortBy sortBy,
+  }) {
+    var filtered = employees.where((emp) {
+      final query = searchQuery.toLowerCase();
+      final matchesSearch = query.isEmpty ||
+          emp.fullName.toLowerCase().contains(query) ||
+          emp.jobTitle.toLowerCase().contains(query) ||
+          emp.department.label.toLowerCase().contains(query);
+
+      final matchesDept =
+          selectedDepartment == null || emp.department == selectedDepartment;
+
+      final matchesFav = !showFavoritesOnly || emp.isFavorite;
+
+      return matchesSearch && matchesDept && matchesFav;
+    }).toList();
+
+    switch (sortBy) {
+      case SortBy.salary:
+        filtered.sort((a, b) => b.salary.compareTo(a.salary));
+      case SortBy.jobTitle:
+        filtered.sort((a, b) => a.jobTitle.compareTo(b.jobTitle));
+      case SortBy.name:
+        filtered.sort((a, b) => a.fullName.compareTo(b.fullName));
+    }
+
+    return filtered;
+  }
 }

@@ -77,34 +77,13 @@ class _EmployeesPageState extends State<EmployeesPage> {
   }
 
   List<Employee> _getFilteredAndSortedEmployees(List<Employee> employees) {
-    var filtered = employees.where((emp) {
-      final matchesSearch =
-          emp.fullName.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-              emp.jobTitle.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-              emp.department.label
-                  .toLowerCase()
-                  .contains(_searchQuery.toLowerCase());
-
-      final matchesDept =
-          _selectedDepartment == null || emp.department == _selectedDepartment;
-
-      final matchesFav = !_showFavoritesOnly || emp.isFavorite;
-
-      return matchesSearch && matchesDept && matchesFav;
-    }).toList();
-
-    filtered.sort((a, b) {
-      switch (_sortBy) {
-        case SortBy.salary:
-          return b.salary.compareTo(a.salary);
-        case SortBy.jobTitle:
-          return a.jobTitle.compareTo(b.jobTitle);
-        case SortBy.name:
-          return a.fullName.compareTo(b.fullName);
-      }
-    });
-
-    return filtered;
+    return EmployeeCubit.filterAndSortEmployees(
+      employees: employees,
+      searchQuery: _searchQuery,
+      selectedDepartment: _selectedDepartment,
+      showFavoritesOnly: _showFavoritesOnly,
+      sortBy: _sortBy,
+    );
   }
 
   Future<void> _openAddEmployeeForm() async {
