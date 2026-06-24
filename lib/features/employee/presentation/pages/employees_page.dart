@@ -34,7 +34,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
   String _searchQuery = "";
   EmployeeDepartment? _selectedDepartment;
   bool _showFavoritesOnly = false;
-  String _sortBy = "name";
+  SortBy _sortBy = SortBy.name;
 
   @override
   void initState() {
@@ -94,12 +94,14 @@ class _EmployeesPageState extends State<EmployeesPage> {
     }).toList();
 
     filtered.sort((a, b) {
-      if (_sortBy == "salary") {
-        return b.salary.compareTo(a.salary);
-      } else if (_sortBy == "jobTitle") {
-        return a.jobTitle.compareTo(b.jobTitle);
+      switch (_sortBy) {
+        case SortBy.salary:
+          return b.salary.compareTo(a.salary);
+        case SortBy.jobTitle:
+          return a.jobTitle.compareTo(b.jobTitle);
+        case SortBy.name:
+          return a.fullName.compareTo(b.fullName);
       }
-      return a.fullName.compareTo(b.fullName);
     });
 
     return filtered;
@@ -190,7 +192,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
             final totalCount = state.employees.length;
             final favoritesCount =
                 state.employees.where((e) => e.isFavorite).length;
-                
+
             return RefreshIndicator(
               onRefresh: () async {
                 await context.read<EmployeeCubit>().loadEmployees();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/widgets/custom_text_form_field.dart';
 import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 
@@ -31,73 +32,28 @@ class EmployeeFilterPanel extends StatelessWidget {
             controller: searchController,
             labelText: "Search Employees",
             hintText: "Search by name, job title, or department",
-            icon: Icons.search,
+            icon: AppIcons.search,
             validator: (value) => null,
           ),
           const SizedBox(height: 12),
           Wrap(
             spacing: 4,
-            children: [
-              FilterChip(
-                label: const Text("Engineering"),
-                selected: selectedDepartment == EmployeeDepartment.engineering,
+            children: EmployeeDepartment.values.map((dept) {
+              return FilterChip(
+                label: Text(dept.label),
+                selected: selectedDepartment == dept,
                 onSelected: (_) {
-                  if (selectedDepartment == EmployeeDepartment.engineering) {
-                    onDepartmentSelected(null);
-                  } else {
-                    onDepartmentSelected(EmployeeDepartment.engineering);
-                  }
+                  onDepartmentSelected(
+                    selectedDepartment == dept ? null : dept,
+                  );
                 },
-              ),
-              FilterChip(
-                  label: const Text("Design"),
-                  selected: selectedDepartment == EmployeeDepartment.design,
-                  onSelected: (_) {
-                    if (selectedDepartment == EmployeeDepartment.design) {
-                      onDepartmentSelected(null);
-                    } else {
-                      onDepartmentSelected(EmployeeDepartment.design);
-                    }
-                  }),
-              FilterChip(
-                label: const Text("HR"),
-                selected: selectedDepartment == EmployeeDepartment.hr,
-                onSelected: (_) {
-                  if (selectedDepartment == EmployeeDepartment.hr) {
-                    onDepartmentSelected(null);
-                  } else {
-                    onDepartmentSelected(EmployeeDepartment.hr);
-                  }
-                },
-              ),
-              FilterChip(
-                label: const Text("Marketing"),
-                selected: selectedDepartment == EmployeeDepartment.marketing,
-                onSelected: (_) {
-                  if (selectedDepartment == EmployeeDepartment.marketing) {
-                    onDepartmentSelected(null);
-                  } else {
-                    onDepartmentSelected(EmployeeDepartment.marketing);
-                  }
-                },
-              ),
-              FilterChip(
-                label: const Text("Sales"),
-                selected: selectedDepartment == EmployeeDepartment.sales,
-                onSelected: (_) {
-                  if (selectedDepartment == EmployeeDepartment.sales) {
-                    onDepartmentSelected(null);
-                  } else {
-                    onDepartmentSelected(EmployeeDepartment.sales);
-                  }
-                },
-              ),
-            ],
+              );
+            }).toList(),
           ),
           SwitchListTile(
             title: const Text("Show Favorites Only"),
             secondary: const Icon(
-              Icons.favorite_border,
+              AppIcons.favoriteBorder,
             ),
             value: showFavoritesOnly,
             onChanged: onFavoritesOnlyChanged,
@@ -106,7 +62,7 @@ class EmployeeFilterPanel extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: TextButton.icon(
               onPressed: onClearFilters,
-              icon: const Icon(Icons.clear),
+              icon: const Icon(AppIcons.clear),
               label: const Text("Clear Filters"),
             ),
           ),

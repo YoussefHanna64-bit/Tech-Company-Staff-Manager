@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
+import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 
 class SortBottomSheet extends StatelessWidget {
-  final String currentSort;
-  final ValueChanged<String> onSelected;
+  final SortBy currentSort;
+  final ValueChanged<SortBy> onSelected;
 
   const SortBottomSheet({
     super.key,
@@ -17,29 +19,29 @@ class SortBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            leading: const Icon(Icons.sort_by_alpha),
+            leading: const Icon(AppIcons.sortByAlpha),
             title: const Text("Sort by Name"),
-            selected: currentSort == "name",
+            selected: currentSort == SortBy.name,
             onTap: () {
-              onSelected("name");
+              onSelected(SortBy.name);
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.payments),
+            leading: const Icon(AppIcons.payments),
             title: const Text("Sort by Salary"),
-            selected: currentSort == "salary",
+            selected: currentSort == SortBy.salary,
             onTap: () {
-              onSelected("salary");
+              onSelected(SortBy.salary);
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.business_center),
+            leading: const Icon(AppIcons.businessCenter),
             title: const Text("Sort by Job Title"),
-            selected: currentSort == "jobTitle",
+            selected: currentSort == SortBy.jobTitle,
             onTap: () {
-              onSelected("jobTitle");
+              onSelected(SortBy.jobTitle);
               Navigator.pop(context);
             },
           ),

@@ -6,10 +6,8 @@ class Validators {
       return "Email is required";
     }
 
-    final hasAtSymbol = text.contains("@");
-    final hasDot = text.contains(".");
-
-    if (!hasAtSymbol || !hasDot) {
+    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    if (!emailRegex.hasMatch(text)) {
       return "Enter a valid email address";
     }
 

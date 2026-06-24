@@ -1,5 +1,7 @@
 enum EmployeeDepartment { engineering, design, hr, marketing, sales }
 
+enum SortBy { name, salary, jobTitle }
+
 extension EmployeeDepartmentExtension on EmployeeDepartment {
   String get label {
     switch (this) {
