@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:staff_manager/features/employee/presentation/pages/employees_page.dart';
 
@@ -40,13 +41,13 @@ class _AppShellState extends State<AppShell> {
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.dashboard_outlined),
-            selectedIcon: Icon(Icons.dashboard),
+            icon: Icon(AppIcons.dashboardOutlined),
+            selectedIcon: Icon(AppIcons.dashboard),
             label: 'Dashboard',
           ),
           NavigationDestination(
-            icon: Icon(Icons.groups_outlined),
-            selectedIcon: Icon(Icons.groups),
+            icon: Icon(AppIcons.groupsOutlined),
+            selectedIcon: Icon(AppIcons.groups),
             label: 'Employees',
           ),
         ],

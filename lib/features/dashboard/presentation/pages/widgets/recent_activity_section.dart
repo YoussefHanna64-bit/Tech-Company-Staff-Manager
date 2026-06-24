@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/theme/app_colors.dart';
 import 'package:staff_manager/core/theme/app_text_styles.dart';
 import 'package:staff_manager/features/dashboard/presentation/pages/widgets/activity_tile.dart';
@@ -23,21 +24,21 @@ class RecentActivitySection extends StatelessWidget {
             children: const [
               ActivityTile(
                 title: "New employee added",
-                icon: Icons.person_add,
+                icon: AppIcons.personAdd,
                 iconColor: AppColors.primary,
                 backgroundColor: AppColors.blueLight,
               ),
               Divider(),
               ActivityTile(
                 title: "Employee profile updated",
-                icon: Icons.edit,
+                icon: AppIcons.edit,
                 iconColor: AppColors.green,
                 backgroundColor: AppColors.greenLight,
               ),
               Divider(),
               ActivityTile(
                 title: "Employee removed from list",
-                icon: Icons.delete,
+                icon: AppIcons.delete,
                 iconColor: AppColors.red,
                 backgroundColor: AppColors.redLight,
               ),

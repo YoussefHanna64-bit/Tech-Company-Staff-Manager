@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/widgets/custom_app_bar.dart';
 import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 import 'package:staff_manager/features/employee/presentation/cubit/employee_cubit.dart';
@@ -166,7 +167,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
         onThemeChanged: widget.onThemeChanged,
         actions: [
           IconButton(
-            icon: const Icon(Icons.sort),
+            icon: const Icon(AppIcons.sort),
             onPressed: _showSortBottomSheet,
           ),
         ],
@@ -252,7 +253,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openAddEmployeeForm,
-        child: const Icon(Icons.add),
+        child: const Icon(AppIcons.add),
       ),
     );
   }

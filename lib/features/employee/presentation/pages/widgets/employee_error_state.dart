@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 
 class EmployeeErrorState extends StatelessWidget {
   final String message;
@@ -21,7 +22,7 @@ class EmployeeErrorState extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.wifi_off,
+              AppIcons.wifiOff,
               size: 70,
               color: colorScheme.error,
             ),
@@ -37,7 +38,7 @@ class EmployeeErrorState extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(AppIcons.refresh),
               label: const Text("Retry"),
             ),
           ],

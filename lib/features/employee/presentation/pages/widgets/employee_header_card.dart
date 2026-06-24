@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 
 class EmployeeHeaderCard extends StatelessWidget {
   final int totalEmployees;
@@ -20,7 +21,7 @@ class EmployeeHeaderCard extends StatelessWidget {
         child: Row(
           children: [
             Icon(
-              Icons.groups_outlined,
+              AppIcons.groupsOutlined,
               size: 40,
               color: colorScheme.primary,
             ),

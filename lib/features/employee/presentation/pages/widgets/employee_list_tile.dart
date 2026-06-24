@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/theme/app_colors.dart';
 import 'package:staff_manager/features/employee/domain/entities/employee.dart';
 
@@ -49,7 +50,7 @@ class EmployeeListTile extends StatelessWidget {
         ),
         trailing: IconButton(
           icon: Icon(
-            employee.isFavorite ? Icons.favorite : Icons.favorite_border,
+            employee.isFavorite ? AppIcons.favorite : AppIcons.favoriteBorder,
             color: employee.isFavorite ? Colors.amber : null,
           ),
           onPressed: onFavoritePressed,

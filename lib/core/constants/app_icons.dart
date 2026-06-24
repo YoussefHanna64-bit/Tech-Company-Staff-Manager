@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+
+class AppIcons {
+  static const IconData login = Icons.login;
+  static const IconData register = Icons.how_to_reg;
+  static const IconData personAdd = Icons.person_add;
+  static const IconData personAddAlt = Icons.person_add_alt_1;
+  static const IconData personOutline = Icons.person_outline;
+  static const IconData emailOutlined = Icons.email_outlined;
+  static const IconData lockOutline = Icons.lock_outline;
+  static const IconData lockReset = Icons.lock_reset;
+  static const IconData dashboard = Icons.dashboard;
+  static const IconData dashboardOutlined = Icons.dashboard_outlined;
+  static const IconData groups = Icons.groups;
+  static const IconData groupsOutlined = Icons.groups_outlined;
+  static const IconData add = Icons.add;
+  static const IconData edit = Icons.edit;
+  static const IconData delete = Icons.delete;
+  static const IconData save = Icons.save_outlined;
+  static const IconData close = Icons.close;
+  static const IconData clear = Icons.clear;
+  static const IconData refresh = Icons.refresh;
+  static const IconData search = Icons.search;
+  static const IconData sort = Icons.sort;
+  static const IconData sortByAlpha = Icons.sort_by_alpha;
+  static const IconData workOutline = Icons.work_outline;
+  static const IconData businessCenter = Icons.business_center;
+  static const IconData accountTree = Icons.account_tree;
+  static const IconData accountTreeOutlined = Icons.account_tree_outlined;
+  static const IconData payments = Icons.payments;
+  static const IconData paymentsOutlined = Icons.payments_outlined;
+  static const IconData peopleOutline = Icons.people_outline;
+  static const IconData corporateFare = Icons.corporate_fare;
+  static const IconData favorite = Icons.favorite;
+  static const IconData favoriteBorder = Icons.favorite_border;
+  static const IconData lightMode = Icons.light_mode;
+  static const IconData darkMode = Icons.dark_mode;
+  static const IconData logout = Icons.logout;
+  static const IconData visibility = Icons.visibility;
+  static const IconData visibilityOff = Icons.visibility_off;
+  static const IconData arrowForwardIos = Icons.arrow_forward_ios;
+  static const IconData wifiOff = Icons.wifi_off;
+}

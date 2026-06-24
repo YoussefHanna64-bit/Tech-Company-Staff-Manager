@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/theme/app_colors.dart';
 import 'package:staff_manager/features/dashboard/presentation/pages/widgets/info_row.dart';
 
@@ -30,7 +31,7 @@ class CompanyOverviewCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 12),
               child: Icon(
-                Icons.corporate_fare,
+                AppIcons.corporateFare,
                 size: 90,
                 color: AppColors.whiteColor.withValues(alpha: .9),
               ),
@@ -58,22 +59,22 @@ class CompanyOverviewCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 InfoRow(
-                  icon: Icons.groups,
+                  icon: AppIcons.groups,
                   text: "Total Employees: $totalEmployees",
                 ),
                 const SizedBox(height: 12),
                 InfoRow(
-                  icon: Icons.favorite,
+                  icon: AppIcons.favorite,
                   text: "Favorite Employees: $favoriteEmployees",
                 ),
                 const SizedBox(height: 12),
                 InfoRow(
-                  icon: Icons.account_tree,
+                  icon: AppIcons.accountTree,
                   text: "Departments: $departments",
                 ),
                 const SizedBox(height: 12),
                 InfoRow(
-                  icon: Icons.payments,
+                  icon: AppIcons.payments,
                   text:
                       "Average Salary: ${averageSalary.toStringAsFixed(0)} EGP",
                 ),

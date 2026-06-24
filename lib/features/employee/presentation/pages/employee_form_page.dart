@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/utils/validators.dart';
 import 'package:staff_manager/core/widgets/custom_button.dart';
 import 'package:staff_manager/core/widgets/custom_drop_down_form_field.dart';
@@ -101,7 +102,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   controller: _nameController,
                   labelText: 'Full name',
                   hintText: 'Example: Legend',
-                  icon: Icons.person_outline,
+                  icon: AppIcons.personOutline,
                   keyboardType: TextInputType.text,
                   validator: (value) =>
                       Validators.validateMinLength(value, 2, "Full name"),
@@ -111,7 +112,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   controller: _jobTitleController,
                   labelText: 'Job title',
                   hintText: 'Example: Flutter Developer',
-                  icon: Icons.work_outline,
+                  icon: AppIcons.workOutline,
                   keyboardType: TextInputType.text,
                   validator: (value) =>
                       Validators.validateMinLength(value, 2, "Job title"),
@@ -121,7 +122,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   controller: _salaryController,
                   labelText: 'Salary',
                   hintText: 'Example: 22000',
-                  icon: Icons.payments_outlined,
+                  icon: AppIcons.paymentsOutlined,
                   keyboardType: TextInputType.number,
                   validator: (value) => Validators.validateSalary(value),
                 ),
@@ -129,7 +130,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 CustomDropdownFormField<EmployeeDepartment>(
                   value: _selectedDepartment,
                   labelText: "Department",
-                  icon: Icons.account_tree_outlined,
+                  icon: AppIcons.accountTreeOutlined,
                   items: EmployeeDepartment.values.map((dept) {
                     return DropdownMenuItem(
                       value: dept,
@@ -151,7 +152,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                 CustomButton(
                   label: widget.isEditing ? "Save Employee" : "Add Employee",
                   onPressed: _submitForm,
-                  icon: Icons.save_outlined,
+                  icon: AppIcons.save,
                 ),
                 const SizedBox(height: 12),
                 SizedBox(
@@ -159,7 +160,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   height: 48,
                   child: OutlinedButton.icon(
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close),
+                    icon: const Icon(AppIcons.close),
                     label: const Text("Cancel"),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -59,7 +60,7 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: onToggleVisibility != null
             ? IconButton(
                 icon: Icon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  obscureText ? AppIcons.visibilityOff : AppIcons.visibility,
                 ),
                 onPressed: onToggleVisibility,
               )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/theme/app_colors.dart';
 import 'package:staff_manager/core/theme/app_text_styles.dart';
 import 'package:staff_manager/core/utils/validators.dart';
@@ -80,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.person_add_alt_1,
+                  const Icon(AppIcons.personAddAlt,
                       size: 80, color: AppColors.primary),
                   const SizedBox(height: 24),
                   const Text(
@@ -100,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyboardType: TextInputType.name,
                     labelText: "Full Name",
                     hintText: "Example: Legend",
-                    icon: Icons.person_outline,
+                    icon: AppIcons.personOutline,
                     validator: (value) =>
                         Validators.validateMinLength(value, 2, "Full name"),
                   ),
@@ -111,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyboardType: TextInputType.emailAddress,
                     labelText: "Email",
                     hintText: "example@company.com",
-                    icon: Icons.email_outlined,
+                    icon: AppIcons.emailOutlined,
                     validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: 16),
@@ -121,7 +122,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyboardType: TextInputType.visiblePassword,
                     labelText: "Password",
                     hintText: "Create a password",
-                    icon: Icons.lock_outline,
+                    icon: AppIcons.lockOutline,
                     validator: Validators.validatePassword,
                     obscureText: _obscurePassword,
                     onToggleVisibility: () {
@@ -137,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyboardType: TextInputType.visiblePassword,
                     labelText: "Confirm Password",
                     hintText: "Re-enter your password",
-                    icon: Icons.lock_reset,
+                    icon: AppIcons.lockReset,
                     obscureText: _obscureConfirmPassword,
                     onToggleVisibility: () {
                       setState(() {
@@ -152,13 +153,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 32),
                   CustomButton(
                     label: "Register",
-                    icon: Icons.how_to_reg,
+                    icon: AppIcons.register,
                     onPressed: _onRegister,
                   ),
                   const SizedBox(height: 16),
                   TextButton.icon(
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.login),
+                    icon: const Icon(AppIcons.login),
                     label: const Text(
                       "Already have an account? Login",
                       style: AppTextStyles.medium16Dark,

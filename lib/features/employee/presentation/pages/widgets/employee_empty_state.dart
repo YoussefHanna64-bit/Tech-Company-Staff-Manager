@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/theme/app_text_styles.dart';
 
 class EmployeeEmptyState extends StatelessWidget {
@@ -20,7 +21,7 @@ class EmployeeEmptyState extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.people_outline,
+              AppIcons.peopleOutline,
               size: 72,
               color: colorScheme.primary,
             ),
@@ -35,7 +36,7 @@ class EmployeeEmptyState extends StatelessWidget {
                 iconColor: colorScheme.onPrimary,
               ),
               onPressed: onClearFilters,
-              icon: const Icon(Icons.clear),
+              icon: const Icon(AppIcons.clear),
               label: const Text("Clear Filters"),
             ),
           ],

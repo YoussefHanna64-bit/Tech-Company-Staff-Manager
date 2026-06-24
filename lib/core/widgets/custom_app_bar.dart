@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/features/auth/presentation/pages/login_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -21,14 +22,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       actions: [
         IconButton(
-          icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+          icon: Icon(isDark ? AppIcons.lightMode : AppIcons.darkMode),
           onPressed: () {
             onThemeChanged(!isDark);
           },
         ),
         ...actions,
         IconButton(
-          icon: const Icon(Icons.logout),
+          icon: const Icon(AppIcons.logout),
           tooltip: 'Logout',
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(

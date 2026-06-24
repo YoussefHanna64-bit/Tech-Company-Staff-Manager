@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:staff_manager/core/constants/app_icons.dart';
 import 'package:staff_manager/core/theme/app_colors.dart';
 import 'package:staff_manager/core/theme/app_text_styles.dart';
 import 'package:staff_manager/core/utils/validators.dart';
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.business_center,
+                  const Icon(AppIcons.businessCenter,
                       size: 80, color: AppColors.primary),
                   const SizedBox(height: 24),
                   const Text(
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     keyboardType: TextInputType.emailAddress,
                     labelText: "Email",
                     hintText: "example@company.com",
-                    icon: Icons.email_outlined,
+                    icon: AppIcons.emailOutlined,
                     validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: 16),
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                     keyboardType: TextInputType.visiblePassword,
                     labelText: "Password",
                     hintText: "Enter your password",
-                    icon: Icons.lock_outline,
+                    icon: AppIcons.lockOutline,
                     validator: Validators.validatePassword,
                     obscureText: _obscurePassword,
                     onToggleVisibility: () {
@@ -108,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 32),
                   CustomButton(
                     label: "Login",
-                    icon: Icons.login,
+                    icon: AppIcons.login,
                     onPressed: _onSubmit,
                   ),
                   const SizedBox(height: 16),
@@ -123,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.person_add),
+                    icon: const Icon(AppIcons.personAdd),
                     label: const Text("Create account",
                         style: AppTextStyles.medium16Dark),
                   )
