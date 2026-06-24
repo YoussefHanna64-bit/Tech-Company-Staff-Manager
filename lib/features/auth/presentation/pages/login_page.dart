@@ -33,16 +33,16 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Welcome back")),
       );
-    }
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => AppShell(
-          isDark: widget.isDark,
-          onThemeChanged: widget.onThemeChanged,
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => AppShell(
+            isDark: widget.isDark,
+            onThemeChanged: widget.onThemeChanged,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override
