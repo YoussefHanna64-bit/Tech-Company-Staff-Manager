@@ -8,14 +8,7 @@ import 'package:staff_manager/core/widgets/custom_text_form_field.dart';
 import 'package:staff_manager/features/main_layout/presentation/app_shell.dart';
 
 class RegisterPage extends StatefulWidget {
-  final bool isDark;
-  final ValueChanged<bool> onThemeChanged;
-
-  const RegisterPage({
-    super.key,
-    required this.isDark,
-    required this.onThemeChanged,
-  });
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -46,10 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => AppShell(
-            isDark: widget.isDark,
-            onThemeChanged: widget.onThemeChanged,
-          ),
+          builder: (context) => const AppShell(),
         ),
       );
     }

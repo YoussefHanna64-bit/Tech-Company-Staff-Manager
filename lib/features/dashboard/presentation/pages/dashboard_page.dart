@@ -11,19 +11,14 @@ import 'package:staff_manager/features/employee/presentation/cubit/employee_cubi
 import 'package:staff_manager/features/employee/presentation/cubit/employee_state.dart';
 
 class DashboardPage extends StatelessWidget {
-  final bool isDark;
-  final ValueChanged<bool> onThemeChanged;
-
-  const DashboardPage(
-      {super.key, required this.isDark, required this.onThemeChanged});
+  const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final currencyFormat = NumberFormat('#,##0', 'en_US');
 
     return Scaffold(
-      appBar: CustomAppBar(
-          title: "Dashboard", isDark: isDark, onThemeChanged: onThemeChanged),
+      appBar: CustomAppBar(title: "Dashboard"),
       body: SafeArea(
         child: BlocBuilder<EmployeeCubit, EmployeeState>(
           builder: (context, state) {

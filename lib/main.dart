@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:staff_manager/core/network/dio_client.dart';
+import 'package:staff_manager/core/theme/cubit/theme_cubit.dart';
 import 'package:staff_manager/features/auth/presentation/pages/login_page.dart';
 import 'package:staff_manager/features/employee/data/datasources/employee_local_data_source.dart';
 import 'package:staff_manager/features/employee/data/datasources/employee_remote_data_source.dart';
@@ -33,41 +34,35 @@ class StaffManagerApp extends StatefulWidget {
 }
 
 class _StaffManagerAppState extends State<StaffManagerApp> {
-  bool isDark = false;
-
-  void toggleTheme(bool value) {
-    setState(() {
-      isDark = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => EmployeeCubit(repo: widget.repository),
-      child: MaterialApp(
-        title: 'Tech Company Portal',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-            brightness: Brightness.light,
-          ),
-          useMaterial3: true,
-        ),
-        darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-            brightness: Brightness.dark,
-          ),
-          useMaterial3: true,
-        ),
-        themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-        home: LoginPage(
-          isDark: isDark,
-          onThemeChanged: toggleTheme,
-        ),
-      ),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => EmployeeCubit(repo: widget.repository)),
+          BlocProvider(create: (context) => ThemeCubit()),
+        ],
+        child: BlocBuilder<ThemeCubit, bool>(builder: (context, isDark) {
+          return MaterialApp(
+            title: 'Tech Company Portal',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.blue,
+                brightness: Brightness.light,
+              ),
+              useMaterial3: true,
+            ),
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.blue,
+                brightness: Brightness.dark,
+              ),
+              useMaterial3: true,
+            ),
+            themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+            home: const LoginPage(),
+          );
+        }));
   }
 }

@@ -15,14 +15,7 @@ import 'package:staff_manager/features/employee/presentation/pages/widgets/emplo
 import 'package:staff_manager/features/employee/presentation/pages/widgets/sort_bottom_sheet.dart';
 
 class EmployeesPage extends StatefulWidget {
-  final bool isDark;
-  final ValueChanged<bool> onThemeChanged;
-
-  const EmployeesPage({
-    super.key,
-    required this.isDark,
-    required this.onThemeChanged,
-  });
+  const EmployeesPage({super.key});
 
   @override
   State<EmployeesPage> createState() => _EmployeesPageState();
@@ -144,8 +137,6 @@ class _EmployeesPageState extends State<EmployeesPage> {
     return Scaffold(
       appBar: CustomAppBar(
         title: "Employees",
-        isDark: widget.isDark,
-        onThemeChanged: widget.onThemeChanged,
         actions: [
           IconButton(
             icon: const Icon(AppIcons.sort),

@@ -4,11 +4,7 @@ import 'package:staff_manager/features/dashboard/presentation/pages/dashboard_pa
 import 'package:staff_manager/features/employee/presentation/pages/employees_page.dart';
 
 class AppShell extends StatefulWidget {
-  final bool isDark;
-  final ValueChanged<bool> onThemeChanged;
-
-  const AppShell(
-      {super.key, required this.isDark, required this.onThemeChanged});
+  const AppShell({super.key});
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -20,14 +16,8 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      DashboardPage(
-        isDark: widget.isDark,
-        onThemeChanged: widget.onThemeChanged,
-      ),
-      EmployeesPage(
-        isDark: widget.isDark,
-        onThemeChanged: widget.onThemeChanged,
-      ),
+      const DashboardPage(),
+      const EmployeesPage(),
     ];
 
     return Scaffold(

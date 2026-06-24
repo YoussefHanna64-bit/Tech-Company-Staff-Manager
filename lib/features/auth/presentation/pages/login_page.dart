@@ -9,11 +9,7 @@ import 'package:staff_manager/features/auth/presentation/pages/register_page.dar
 import 'package:staff_manager/features/main_layout/presentation/app_shell.dart';
 
 class LoginPage extends StatefulWidget {
-  final bool isDark;
-  final ValueChanged<bool> onThemeChanged;
-
-  const LoginPage(
-      {super.key, required this.isDark, required this.onThemeChanged});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -36,10 +32,7 @@ class _LoginPageState extends State<LoginPage> {
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => AppShell(
-            isDark: widget.isDark,
-            onThemeChanged: widget.onThemeChanged,
-          ),
+          builder: (context) => const AppShell(),
         ),
       );
     }
@@ -117,10 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => RegisterPage(
-                            isDark: widget.isDark,
-                            onThemeChanged: widget.onThemeChanged,
-                          ),
+                          builder: (context) => const RegisterPage(),
                         ),
                       );
                     },
